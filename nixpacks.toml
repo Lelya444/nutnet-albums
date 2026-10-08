@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["php84", "php84Packages.composer", "nodejs_20", "postgresql"]
+nixPkgs = ["php84", "php84Packages.composer", "nodejs_20"]
 
 [phases.install]
 cmds = [
@@ -16,4 +16,4 @@ cmds = [
 ]
 
 [start]
-cmd = "php artisan migrate --force && php artisan config:cache && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
+cmd = "php artisan config:cache && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
