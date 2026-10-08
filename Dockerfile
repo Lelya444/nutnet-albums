@@ -16,6 +16,8 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 RUN npm install && npm run build
 
+RUN chmod +x /app/start.sh
+
 EXPOSE 8080
 
-CMD php -r "file_put_contents('/app/.env', 'APP_NAME='.getenv('APP_NAME').PHP_EOL.'APP_ENV='.getenv('APP_ENV').PHP_EOL.'APP_KEY='.getenv('APP_KEY').PHP_EOL.'APP_DEBUG='.getenv('APP_DEBUG').PHP_EOL.'APP_URL='.getenv('APP_URL').PHP_EOL.'APP_LOCALE='.getenv('APP_LOCALE').PHP_EOL.'APP_FALLBACK_LOCALE='.getenv('APP_FALLBACK_LOCALE').PHP_EOL.'LOG_CHANNEL='.getenv('LOG_CHANNEL').PHP_EOL.'LOG_LEVEL='.getenv('LOG_LEVEL').PHP_EOL.'SESSION_DRIVER='.getenv('SESSION_DRIVER').PHP_EOL.'CACHE_STORE='.getenv('CACHE_STORE').PHP_EOL.'QUEUE_CONNECTION='.getenv('QUEUE_CONNECTION').PHP_EOL.'LASTFM_API_KEY='.getenv('LASTFM_API_KEY').PHP_EOL.'DB_CONNECTION='.getenv('DB_CONNECTION').PHP_EOL.'DB_HOST='.getenv('DB_HOST').PHP_EOL.'DB_PORT='.getenv('DB_PORT').PHP_EOL.'DB_DATABASE='.getenv('DB_DATABASE').PHP_EOL.'DB_USERNAME='.getenv('DB_USERNAME').PHP_EOL.'DB_PASSWORD='.getenv('DB_PASSWORD').PHP_EOL);" && php artisan config:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+CMD ["/bin/bash", "/app/start.sh"]
